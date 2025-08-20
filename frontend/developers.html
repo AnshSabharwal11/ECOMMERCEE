@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Our Developers</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container">
+  <h2 class="mt-5">Meet the Developers</h2>
+
+  <div id="devList" class="row mt-4"></div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $.getJSON('developers.json', function (data) {
+      if (!data.length) return $('#devList').html('<p>No developer data available.</p>');
+      data.forEach(dev => {
+        $('#devList').append(`
+          <div class="col-md-4 mb-3">
+            <div class="card p-3 shadow-sm">
+              <h5>${dev.name}</h5>
+              <p>${dev.role}</p>
+            </div>
+          </div>
+        `);
+      });
+    }).fail(() => {
+      $('#devList').html('<p>Error loading developer info.</p>');
+    });
+  </script>
+</body>
+</html>
